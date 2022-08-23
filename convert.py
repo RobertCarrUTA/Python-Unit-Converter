@@ -13,7 +13,7 @@ layout = [
 ]
 
 # Converter is the string for the title parameter for sg.Window().
-window = sg.Window("Converter", layout).read()
+window = sg.Window("Converter", layout)
 
 while True:
     # .read() listens for any kind of input on the window, so if this is the last
