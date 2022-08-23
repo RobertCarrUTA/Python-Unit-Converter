@@ -44,5 +44,7 @@ while True:
                     output_string = f"{input_value} seconds are {output} minutes."
 
             window["-OUTPUT-"].update(output_string)
+        else:
+            window["-OUTPUT-"].update("Please enter a number")
 
 window.close()
