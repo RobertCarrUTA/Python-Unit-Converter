@@ -7,8 +7,12 @@ import PySimpleGUI as sg
 # Think of the screen broken up into 3 rows, the first list is the top row (top of the screen).
 # The second list is the middle row of the screen (middle of the screen), and list 3 is the bottom row (bottom of the screen)
 layout = [
-    [sg.Input(), sg.Spin(["km to miles", "kg to pounds", "seconds to minuets"])],
-    [sg.Button("Button")]
+    [
+        sg.Input(key = "-INPUT-"),
+        sg.Spin(["km to miles", "kg to pounds", "seconds to minuets"], key = "-UNITS-"),
+        sg.Button("Convert", key = "-CONVERT-")
+    ],
+    [sg.Text("Output", key = "-OUTPUT-")]
 ]
 
 # Converter is the string for the title parameter for sg.Window().
@@ -22,10 +26,17 @@ while True:
     if event == sg.WIN_CLOSED:
         break
 
-    # Handling the event of sg.("Button") being pressed, we use "Button" as the event because
-    # we named it sg.("Button")
-    if event == "Button":
-        # If you put a key on your layout elements, you can print that value specifically by its key
-        print(values)
+    # Handling the event of sg.Button("Convert") being pressed, we use "Button" as the event because
+    # we named it sg.Button("Convert")
+    if event == "-CONVERT-":
+        input_value = values["-INPUT-"]
+
+        if input_value.isnumeric():
+            match values["-UNITS-"]:
+                case "km to miles":
+                    output = round(float(input_value) * 0.6214, 2)
+                    output_string = f"{input_value} km are {output} miles."
+
+            window["-OUTPUT-"].update(output_string)
 
 window.close()
